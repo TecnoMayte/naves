@@ -3,6 +3,7 @@ input.onButtonPressed(Button.A, function () {
 })
 input.onButtonPressed(Button.AB, function () {
     disparo = game.createSprite(nave.get(LedSpriteProperty.X), nave.get(LedSpriteProperty.Y))
+    music.playSoundEffect(music.createSoundEffect(WaveShape.Square, 1600, 1, 255, 0, 300, SoundExpressionEffect.None, InterpolationCurve.Curve), SoundExpressionPlayMode.UntilDone)
     for (let index = 0; index < 5; index++) {
         disparo.change(LedSpriteProperty.Y, -1)
         basic.pause(100)
@@ -23,8 +24,8 @@ game.setScore(0)
 basic.forever(function () {
     if (disparo.get(LedSpriteProperty.Y) == 0) {
         disparo.delete()
+        sprite = 0
     }
-    sprite = 0
 })
 basic.forever(function () {
     basic.pause(randint(3000, 1000))
@@ -44,6 +45,16 @@ basic.forever(function () {
         disparo.delete()
         game.addScore(1)
     } else if (marciano.isTouching(nave)) {
+        music.playSoundEffect(music.createSoundEffect(
+        WaveShape.Square,
+        2269,
+        40,
+        255,
+        195,
+        600,
+        SoundExpressionEffect.Tremolo,
+        InterpolationCurve.Logarithmic
+        ), SoundExpressionPlayMode.UntilDone)
         game.gameOver()
     } else if (marciano.get(LedSpriteProperty.Y) == 4) {
         game.gameOver()
